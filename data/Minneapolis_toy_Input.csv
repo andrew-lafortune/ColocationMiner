@@ -1,0 +1,10 @@
+safegraph_place_id,location_name,brands,top_category,sub_category,naics_code,latitude,longitude,city,region
+sg:80ed5aeaee334840be638459707fbdc3,Walker Art Center,,Other Miscellaneous Store Retailers,Art Dealers,"453920",44.967992,-93.328,Minneapolis,MN
+sg:d468aec1a90a437185360b5c1b1d00df,Bauhaus Brew Labs,,Beverage Manufacturing,Breweries,"312120",44.965,-93.321,Minneapolis,MN
+sg:4e218fe6f98147d0bdc8a5a29aeb2de3,Kaufman Container,,Waste Treatment and Disposal,Hazardous Waste Treatment and Disposal,"562211",44.97269,-93.325,Minneapolis,MN
+sg:8e2618fb0f0a42a6994941c74b047cbe,The Malt Shop,,Restaurants and Other Eating Places,Snack and Nonalcoholic Beverage Bars,"722515",44.97000,-93.328,Minneapolis,MN
+sg:6fa2311c1d284014a560ec1cfd026ac6,Arete Wealth Strategists,,Other Financial Investment Activities,Investment Advice,"523930",44.977794,-93.21,Minneapolis,MN
+sg:a1a36cc57f4644018fa74e0abfa75023,Minneapolis Fire Department Station 4,,"Justice, Public Order, and Safety Activities",Fire Protection,"922160",44.92,-93.32,Minneapolis,MN
+sg:555149b9b9ce4884a013083c10945892,Nicollet Chiropractic Clinic,,Offices of Other Health Practitioners,Offices of Chiropractors,"621310",44.92,-93.21,Minneapolis,MN
+sg:c15277b450de412fa40fedfc0e240732,Simbacraftware,,Clothing Stores,Women's Clothing Stores,"448120",44.915,-93.205,Minneapolis,MN
+sg:deb9e9a6e10b48a1a7676ef8b5e98cf0,Speedway,Speedway,Gasoline Stations,Snack and Nonalcoholic Beverage Bars,"447110",44.918,-93.21,Minneapolis,MN

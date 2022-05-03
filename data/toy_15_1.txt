@@ -1,0 +1,16 @@
+x,y,class
+0,0,empty_sq
+5,2,empty_ci
+3,4,dotted_sq
+1,1,empty_ci
+2,5,dotted_sq
+4,1,empty_ci
+5,5,dashed_sq
+0,2,solid_ci
+5,0,empty_ci
+1,4,empty_ci
+1,5,empty_sq
+0,5,solid_ci
+5,1,empty_sq
+4,3,empty_sq
+2,1,empty_ci

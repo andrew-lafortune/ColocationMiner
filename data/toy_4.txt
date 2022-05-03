@@ -1,0 +1,5 @@
+x,y,class,id
+1,1,dotted_sq,1
+2,2,dotted_sq,2
+3,1,dotted_sq,3
+2,0,circle,1
