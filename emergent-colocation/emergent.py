@@ -1,23 +1,5 @@
-
-'''
-
-INPUT: A baseline set of locations (optional), an emergent set of locations (need dates)
-
-STEPS:
-1. Determine date/time range for emergence
-    - allow option to duplicate plots for a certain time step and aggregate multiple steps
-    - include start and end time as optional parameters
-2. For each time step, add new events to data
-    - Check colocation rules {new} => {old}, participation index should equal conditional probability(?)
-    
-OUTPUT:
-Set of rules for emergent colocation, final plot of colocations, gif of evolution if specified
-
-
-'''
 import pandas as pd
 
-from datetime import datetime
 from classes import CascadeRule
 
 def get_prevalent(T, theta):

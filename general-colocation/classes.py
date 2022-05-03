@@ -10,14 +10,6 @@ class Rule:
     def __str__(self) -> str:
         return '{'+', '.join(self.antecedent)+'} => '+str(self.consequent)+' ('+str(round(self.p, 4))+', '+str(round(self.cp, 4))+')'
 
-class CascadeRule:
-    def __init__(self, antecedent, consequent, cpi) -> None:
-        self.antecedent = antecedent
-        self.consequent = consequent
-        self.cpi = cpi
-    def __str__(self) -> str:
-        return str(self.antecedent)+' => '+str(self.consequent)+', Cascade Participation Index: '+str(round(self.cpi, 4))
-
 class Colocation:
     def __init__(self, items, t, prevalence) -> None:
         self.items = items

@@ -3,8 +3,7 @@ ___
 > This repository contains the code for the spatial-colocation package, which implements the main algorithm from:
 >
 >Shekhar, S., Huang, Y. (2001). Discovering Spatial Co-location Patterns: A Summary of Results. In: Jensen, C.S., Schneider, M., Seeger, B., Tsotras, V.J. (eds) Advances in Spatial and Temporal Databases. SSTD 2001. Lecture Notes in Computer Science, vol 2121. Springer, Berlin, Heidelberg. https://doi.org/10.1007/3-540-47724-1_13
->
-> Sample code for finding emergent co-locations across a time-series of events is also included in this repository, but not in the spatial-colocation package. Emergent co-location is a topic of ongoing research and the code included here may be used as a starting point for future works.
+
 ___
 # The Co-location Package
 
@@ -48,35 +47,15 @@ Returns:
 - a list of DataFrames T, one for each k=1,...,k
 - the set of association rules R with conditional probability of alpha or higher
 
-# Emergent Co-location
-Emergent co-location can be used to find 
-### Emergent Co-location
-```python
-T,R = emergent(data, new_events, position_column, class_column, id_column, time_column, time_freq=None, old_events=None, theta=0.6, alpha=0.5,
-               relation='meter', threshold=100, plot=False, shape_file=None, out_plot=None, out_csv=None, gif=False)
-```
-
-Configurable to:
-- find prevalent colocations of new events with existing events across a series of time steps 
-- show the final plot of all time steps together in a single plot
-- store the plot of prevalent colocations each time step as a .csv file
-- write the plots of all separate time steps together as a .gif file in time order
-
-Returns:
-- a dictionary of DataFrames T, the colocations with participation index greater than theta for each time step indexed by time
-- the set of association rules R with conditional probability of alpha or higher for the final set of prevalent colocations in T
-
-Assumes new_locations has a date column
-
 ### Toy Example
 To verify that the code is working correctly, execute the following code snippet:
 
 ```python
-    data = pd.read_csv('data/toy_data.txt')
+    d = {'x':[1,2,2,3,4,6],'y':[3,1,5,3,5,1],'class':['solid_sq','empty_ci','empty_ci','solid_ci','dotted_sq','dotted_sq'],'id':[1,1,2,1,1,2]}
+    data = pd.DataFrame(data=d)
     data['pos'] = gpd.points_from_xy(data.x,data.y)
 
     T,R = general(data, 'pos','class','id',relation='unit',threshold=2.3)
-
     
     print('\n',T[-1],'\n')
     
