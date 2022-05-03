@@ -10,7 +10,7 @@ ___
 
 ## Installation
 ```python
-pip install spatial-colocation
+pip install general-colocation
 ```
 ## Usage
 
