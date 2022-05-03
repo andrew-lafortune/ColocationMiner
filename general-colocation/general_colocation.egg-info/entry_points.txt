@@ -1,0 +1,3 @@
+[console_scripts]
+colocation = colocation.__main__:main
+

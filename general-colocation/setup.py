@@ -1,5 +1,5 @@
 import pathlib
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -14,7 +14,7 @@ setup(
     description="Discover colocation patterns from spatial datasets",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/andrew-lafortune/ColocationMiner",
+    url="https://github.com/andrew-lafortune/ColocationMiner/tree/master/general-colocation",
     author="Andrew LaFortune",
     author_email="lafor038@umn.edu",
     license="MIT",
@@ -23,7 +23,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=["general-colocation"],
+    packages=find_packages(),
     include_package_data=True,
     install_requires=["pandas", "geopandas", "shapely", "numpy", "matplotlib", "imageio"],
     entry_points={

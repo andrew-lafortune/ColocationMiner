@@ -1,0 +1,14 @@
+README.md
+setup.py
+general-colocation/__init__.py
+general-colocation/classes.py
+general-colocation/colocation.py
+general-colocation/general.py
+general-colocation/relations.py
+general-colocation/utils.py
+general_colocation.egg-info/PKG-INFO
+general_colocation.egg-info/SOURCES.txt
+general_colocation.egg-info/dependency_links.txt
+general_colocation.egg-info/entry_points.txt
+general_colocation.egg-info/requires.txt
+general_colocation.egg-info/top_level.txt
