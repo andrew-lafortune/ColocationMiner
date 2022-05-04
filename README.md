@@ -7,7 +7,44 @@ ___
 > Sample code for finding emergent co-locations across a time-series of events is also included in this repository, but not in the spatial-colocation package. Emergent co-location is a topic of ongoing research and the code included here may be used as a starting point for future works.
 ___
 # What is Co-Location?
+Spatial Co-location patterns are groups of objects or events that occur near each other frequently within a dataset. The definition of "near" is a spatial relation, which is often some distance threshold such as 100 meters. This would mean that two objects within 100 meters of each other are co-located. 
 
+## Key Terms
+1. Participation Ratio: For a given co-location, the Participation Ratio of each class in the co-location is the proportion of total instances of the class that take part in the colocation.
+- e.g. If there are 4 instances of class A (A1,A2,A3,A4), and 2 of them participate in the co-location {A,B} ({A1,B1},{A2,B2}), then the participation index of A in {A,B} is 0.5
+2. Participation Index: This is the minimum Participation Ratio of all items in a co-location.
+- e.g. For the co-location {A,B}, the Participation Ratio of A is 0.5. If the Participatio Ratio of B is 0.3, then the Participation Index of {A,B} is 0.3
+3. Prevalence: The prevalence of a co-location is defined as the participation index of the group of classes that constitute it.
+4. Spatial Relation: A Reflexive and Symmetric function R(A,B) which is True if a A and B are within a defined spatial threshold of each other.
+5. Neighborhood: The set of all items that have a spatial relation with a specific item.
+6. Conditional Probability: The probability of an event given that another event has already ocurred. In this context, it is the probability that an item is part of a co-location given that item has a specific class.
+7. Event-Centric Conditional Probability: The probability that event(s) of type B (B can be a set of classes) are within the spatial relation neighborhood of an event of type A.
+
+# What You Can Get
+Co-location pattern mining can distill a large dataset with many different classes into a much smaller and interpretable set. The motivating example for this work is a set of Points of Interest (POIs) in the city of Minneapolis, Minnesota which are labeled by category. Using co-location pattern mining the plot of all points:
+
+![All Minneapolis POIs](notebook_examples/general_colocation/full_out_plot_k4/k1.png "All Minneapolis POIs")
+
+Can be reduced to a plot of just the prevalent size 4 co-locations:
+
+![Size 4 co-locations of Minneapolis POIs](notebook_examples/general_colocation/full_out_plot_k4/k4.png "Size 4 co-locations of Minneapolis POIs")
+
+And the 5 rules for size 4 co-locations with the highest conditional probability:
+```
+{Clothing Stores, Other Amusement and Recreation Industries, Personal Care Services} => Restaurants and Other Eating Places (0.4163, 1.0)
+{Health and Personal Care Stores, Offices of Other Health Practitioners, Personal Care Services} => Restaurants and Other Eating Places (0.4101, 0.9996)
+{Motion Picture and Video Industries, Other Financial Investment Activities, Other Personal Services} => Traveler Accommodation (0.4396, 0.9988)
+{Offices of Dentists, Offices of Other Health Practitioners, Personal Care Services} => Restaurants and Other Eating Places (0.4055, 0.9983)
+{Offices of Other Health Practitioners, Offices of Physicians, Personal Care Services} => Restaurants and Other Eating Places (0.4511, 0.9982)
+```
+
+Can be used to draw conclusions like:
+- Restaurants __always__ appear nearby groups that have Clothing Stores, Personal Care Services, and Other Amusement and Recreation Industries
+- Restaurants often appear near Dentists' Offices, Personal care Services, and other Health Care Stores/Practitioners
+
+Many other applications for co-location exist such as:
+- exploring potential locations for a new business
+- [finding relationships between different types of cells in cancer patients](http://www.spatial.cs.umn.edu/Courses/Fall21/5715/homeworks/G13_News_Presentation.pdf)
 
 # The Co-location Package
 
@@ -24,7 +61,7 @@ The input to the `general` function is a pandas DataFrame with, at a minimum, co
 3. id: Unique identifiers for each instance of a class.
 
 ### __Optional Configurations__
-There are several optional parameters for the `general` function that modify the spatial relation, prevalence, and conditional probability thresholds as well as the format of the output data. See the explanation of key concepts section for more details on terms like prevalence and event-centric conditional probability.
+There are several optional parameters for the `general` function that modify the spatial relation, prevalence, and conditional probability thresholds as well as the format of the output data. See the [Key Terms](https://github.com/andrew-lafortune/ColocationMiner/blob/master/README.md#key-terms) section for more details on terms like prevalence and event-centric conditional probability.
 
 - k: The largest size co-location to find. All co-locations of size k=1,...,k will be returned as items in the output list T.
 - theta: The prevalence threshold. Co-locations with a participation index below theta will be pruned from the output.
@@ -134,7 +171,7 @@ Three Jupyter Notebook examples have been provided to help familiarize you with 
 ### __toy_mpls_ex.ipynb__
 The first example works with a modified subset of the full Minneapolis location data. It shows the process for general colocation on an output plot with a ShapeFile background which is the shape of the city of Minneapolis, Minnesota. Of the 9 total rows in the data, 5 are included in prevalent co-locations of size 3.
 
-### __full_mpls_ex.ipynb__
+### __full_mpls_ex.ipynb__ (and full_mpls_exk4.ipynb, same code for larger co-location size)
 This example works with the full set of Minneapolis location data provided by [SafeGraph](http://safegraph.com/) for educational/research purposes. It is interesting that the output plot for size 3 co-locations reveals patterns of popular commercial areas such as downtown Minneapolis, Lyndale Avenue, and Lake Street. The co-locations are grouped by their NAICS top-category designations, so the association rules printed in cell 6 reveal which types of stores are commonly co-located together such as Clothing Stores, Personal Care Services, and Restaurants, with a 99.79% conditional probability that a pair of Clothing Store and Personal Care Services will have a Restaurant within 100 meters of it. This notebook can be modified to also look at groupings by brand or NAICS sub-category and see what other patterns emerge.
 
 ## Emergent

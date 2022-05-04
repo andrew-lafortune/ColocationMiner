@@ -61,7 +61,8 @@ def general(data, position_column, class_column, id_column, k=3, theta=0.6, alph
     if out_plot:
         for i in range(len(T)):
             plot = plot_table_instance(gpd.GeoDataFrame(data, geometry=position_column), T, class_column, id_column, shape_file, out_plot, k=i+1)
-            plot.close()
+            if plot is not None:
+                plot.close()
     if plot:
         last_plot = plot_table_instance(gpd.GeoDataFrame(data, geometry=position_column), T, class_column, id_column, shape_file, out_plot, k=len(T))
         last_plot.show(block=True)
