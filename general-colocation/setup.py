@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="general-colocation",
-    version="1.0.0",
+    version="1.0.5",
     description="Discover colocation patterns from spatial datasets",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -28,7 +28,7 @@ setup(
     install_requires=["pandas", "geopandas", "shapely", "numpy", "matplotlib", "imageio"],
     entry_points={
         "console_scripts": [
-            "colocation=colocation.__main__:main",
+            "colocation=general_colocation:colocation.main",
         ]
     },
 )

@@ -6,6 +6,9 @@ ___
 >
 > Sample code for finding emergent co-locations across a time-series of events is also included in this repository, but not in the spatial-colocation package. Emergent co-location is a topic of ongoing research and the code included here may be used as a starting point for future works.
 ___
+# What is Co-Location?
+
+
 # The Co-location Package
 
 ## Installation
@@ -48,9 +51,9 @@ Returns:
 - a list of DataFrames T, one for each k=1,...,k
 - the set of association rules R with conditional probability of alpha or higher
 
-# Emergent Co-location
+# Emergent Co-location (not packaged)
 Emergent co-location can be used to find 
-### Emergent Co-location
+## Emergent Co-location
 ```python
 T,R = emergent(data, new_events, position_column, class_column, id_column, time_column, time_freq=None, old_events=None, theta=0.6, alpha=0.5,
                relation='meter', threshold=100, plot=False, shape_file=None, out_plot=None, out_csv=None, gif=False)
@@ -66,16 +69,16 @@ Returns:
 - a dictionary of DataFrames T, the colocations with participation index greater than theta for each time step indexed by time
 - the set of association rules R with conditional probability of alpha or higher for the final set of prevalent colocations in T
 
-Assumes new_locations has a date column
+Assumes new_locations has a date column.
 
-### Toy Example
+# Toy Example
 To verify that the code is working correctly, execute the following code snippet:
 
 ```python
     data = pd.read_csv('data/toy_data.txt')
     data['pos'] = gpd.points_from_xy(data.x,data.y)
 
-    T,R = general(data, 'pos','class','id',relation='unit',threshold=2.3)
+    T,R = general.colocate(data, 'pos','class','id',relation='unit',threshold=2.3)
 
     
     print('\n',T[-1],'\n')
@@ -86,7 +89,7 @@ To verify that the code is working correctly, execute the following code snippet
 
 By running the command:
 ```
-    python3 colocation.py
+    colocation
 ```
 
 The terminal output should look something like this (timing may vary slightly):
@@ -109,3 +112,36 @@ The terminal output should look something like this (timing may vary slightly):
     {solid_ci, solid_sq} => empty_ci (1.0, 1.0)
     {solid_ci} => solid_sq (1.0, 1.0)
 ```
+
+What we have done here is take the data:
+
+![Toy Data](readme_figs/readme_ex.png "Toy Data")
+
+Which can be plotted as:
+
+![Toy Data Plot Full](readme_figs/k1.png "All Points")
+
+And pruned non-prevalent co-locations up to size 3 to get the result:
+
+![Toy Data Plot k=3](readme_figs/k3.png "Prevalent 3 Co-locations")
+
+The 'dotted_sq' points are pruned because the lower right point with id 2ds is too far away from the other points to have a spatial relation, which makes the relation of the other 'dotted_sq' point with different classes less prevalent to the point where the relationships are below the prevalence threshold and all 'dotted_sq' points are pruned.
+
+# Detailed Examples
+Three Jupyter Notebook examples have been provided to help familiarize you with the functionality provided by this repository.
+
+## General
+### __toy_mpls_ex.ipynb__
+The first example works with a modified subset of the full Minneapolis location data. It shows the process for general colocation on an output plot with a ShapeFile background which is the shape of the city of Minneapolis, Minnesota. Of the 9 total rows in the data, 5 are included in prevalent co-locations of size 3.
+
+### __full_mpls_ex.ipynb__
+This example works with the full set of Minneapolis location data provided by [SafeGraph](http://safegraph.com/) for educational/research purposes. It is interesting that the output plot for size 3 co-locations reveals patterns of popular commercial areas such as downtown Minneapolis, Lyndale Avenue, and Lake Street. The co-locations are grouped by their NAICS top-category designations, so the association rules printed in cell 6 reveal which types of stores are commonly co-located together such as Clothing Stores, Personal Care Services, and Restaurants, with a 99.79% conditional probability that a pair of Clothing Store and Personal Care Services will have a Restaurant within 100 meters of it. This notebook can be modified to also look at groupings by brand or NAICS sub-category and see what other patterns emerge.
+
+## Emergent
+### __mpls_visit.ipynb__
+This example works with another set of [SafeGraph](http://safegraph.com/) data which includes the opening dates for some of the locations in the opened_on column. Using this column we can split the data into old locations, which don't have an opened_on date and are assumed to have been open before that data was available, and new locations which do have an opened_on date. A simplified version of the general colocation algorithm is run for each time step only considering relations between new locations and locations that existed prior to the current timestep. Making this comparison repeatedly and adding new events to the list of old events after their time step shows some of the emerging patterns like when a new chain of restaurants is started and frequently co-locates with a competitor.
+
+The notebook also takes a closer look at the locations of Roti Mediterranean Grill. The mined association rules show that it always co-locates with Bruegger's, Caribou Coffee, and Starbucks Coffee, and the last figure shows the locations in downtown Minneapolis and on the East Bank campus of the University of Minnesota. It is worth noting that the campus location has since closed, and another location is open in St. Louis Park. These discrepancies represent the limited scope of the data in space (only the Minneapolis area) and time (the campus location only closed recently). As more data becomes available and further research is done on Emergent Co-Location mining techniques, more significant conclusions should be possible.
+
+# Dataset Citation
+The data used in the Jupyter Notebook examples comes from [SafeGraph](http://safegraph.com/), a data company that aggregates anonymized location data from numerous applications in order to provide insights about physical places, via the [SafeGraph](http://safegraph.com/) Community. To enhance privacy, SafeGraph excludes census block group information if fewer than two devices visited an establishment in a month from a given census block group.

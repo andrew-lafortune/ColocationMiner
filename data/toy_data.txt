@@ -1,7 +1,7 @@
 x,y,class,id
-1,3,solid_sq,1
-2,1,empty_ci,1
-2,5,empty_ci,2
-3,3,solid_ci,1
-4,5,dotted_sq,1
-6,1,dotted_sq,2
+1,3,solid_sq,1ss
+2,1,empty_ci,1ec
+2,5,empty_ci,2ec
+3,3,solid_ci,1sc
+4,5,dotted_sq,1ds
+6,1,dotted_sq,2ds

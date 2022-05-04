@@ -1,9 +1,9 @@
 import pandas as pd
 import geopandas as gpd
 
-from general import colocate
-from utils import plot_table_instance
-from relations import get_relation
+from general_colocation.general import colocate
+from general_colocation.utils import plot_table_instance
+from general_colocation.relations import get_relation
 
 def general(data, position_column, class_column, id_column, k=3, theta=0.6, alpha=0.5, 
             relation='meter', threshold=100, plot=False, shape_file=None, out_plot=None, out_csv=None):
@@ -70,9 +70,7 @@ def general(data, position_column, class_column, id_column, k=3, theta=0.6, alph
 
     return T,R
 
-
-
-if __name__ == '__main__':
+def main():
     d = {'x':[1,2,2,3,4,6],'y':[3,1,5,3,5,1],'class':['solid_sq','empty_ci','empty_ci','solid_ci','dotted_sq','dotted_sq'],'id':[1,1,2,1,1,2]}
     data = pd.DataFrame(data=d)
     data['pos'] = gpd.points_from_xy(data.x,data.y)
@@ -83,3 +81,6 @@ if __name__ == '__main__':
     
     for r in R:
         print(r)
+
+if __name__ == '__main__':
+    main()

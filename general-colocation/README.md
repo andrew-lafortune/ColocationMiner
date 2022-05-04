@@ -34,6 +34,7 @@ There are several optional parameters for the `general` function that modify the
 
 ### __General Co-location__
 ```python
+from general_colocation import colocation
 T,R = colocation.general(data, position_column, class_column, id_column, k=3, theta=0.6, alpha=0.5, 
                         relation='meter', threshold=100, plot=False, shape_file=None, out_plot=None, out_csv=None):
 ```
@@ -65,7 +66,7 @@ To verify that the code is working correctly, execute the following code snippet
 
 By running the command:
 ```
-    python3 colocation.py
+    colocation
 ```
 
 The terminal output should look something like this (timing may vary slightly):

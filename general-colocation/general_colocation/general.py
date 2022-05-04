@@ -2,8 +2,8 @@ from builtins import isinstance
 import pandas as pd
 import geopandas as gpd
 from datetime import datetime
-from utils import generate_supersets, generate_subsets
-from classes import Rule, Colocation
+from general_colocation.utils import generate_supersets, generate_subsets
+from general_colocation.classes import Rule, Colocation
 
 def generate_table_instances(C, T, P, k, relation, thold):
     if k == 2:
